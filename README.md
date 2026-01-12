@@ -1,12 +1,15 @@
 # Next.js Actions Analyzer (Caido plugin)
 
-A Caido plugin that helps you discover, analyze, and export **Next.js Server Actions** observed in proxy traffic.
+A Caido plugin that helps you discover, analyze, and export **Next.js Server Actions** observed in proxy traffic. inspired from [This Burp plugin](https://github.com/Adversis/NextjsServerActionAnalyzer).
 
 It:
 - Detects executed Server Actions via the `Next-Action` header
 - Scans `/_next/static/chunks/*.js` responses to discover action ids + function names
 - Highlights simple security signals (e.g. missing auth headers, suspicious parameter keys)
 - Lets you open the associated chunk request, create a replay session, and export results
+
+
+![Screenshot](_assets_/screenshot.png)
 
 ## Installation
 

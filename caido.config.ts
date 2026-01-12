@@ -11,7 +11,7 @@ const id = "nextjs-actions-analyzer";
 export default defineConfig({
   id,
   name: "Next.js Actions Analyzer",
-  description: "Analyze Next.js Server Actions in Caido",
+  description: "Analyze Next.js Server Actions",
   version: "1.0.0",
   author: {
     name: "fir3cr4ckers",
