@@ -12,7 +12,7 @@ export default defineConfig({
   id,
   name: "Next.js Actions Analyzer",
   description: "Analyze Next.js Server Actions",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "fir3cr4ckers",
     url: "https://github.com/yassinebk",
