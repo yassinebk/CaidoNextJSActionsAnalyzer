@@ -1,3 +1,7 @@
 node_modules
 dist
 .DS_Store
+
+# Signing keys
+public.pem
+private_key.pem
