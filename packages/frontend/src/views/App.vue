@@ -7,7 +7,7 @@ import type {
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 
 import { useSDK } from "@/plugins/sdk";
 
@@ -70,6 +70,8 @@ const loadSelected = async () => {
       to: reqView.state.doc.length,
       insert: result.value.requestRaw,
     },
+    selection: { anchor: 0 },
+    scrollIntoView: true,
   });
 
   const respView = respEditor.getEditorView();
@@ -79,14 +81,15 @@ const loadSelected = async () => {
       to: respView.state.doc.length,
       insert: result.value.responseRaw,
     },
+    selection: { anchor: 0 },
+    scrollIntoView: true,
   });
 };
 
-const onRowClick = async (entry: ActionEntry) => {
+const onRowClick = (entry: ActionEntry) => {
   selectedRequestId.value = entry.requestId;
   selectedActionId.value = entry.actionId;
   actionNotes.value = entry.actionNotes;
-  await loadSelected();
 };
 
 const copyActionId = async (actionId: string) => {
@@ -106,7 +109,6 @@ const openChunkForAction = async (actionId: string) => {
   }
 
   selectedRequestId.value = result.value.requestId;
-  await loadSelected();
 };
 
 const createTestReplay = async (actionId: string) => {
@@ -171,6 +173,11 @@ const onClear = async () => {
   await refreshActions();
   await refreshDiscovery();
 };
+
+watch(selectedRequestId, async (requestId) => {
+  if (requestId === undefined) return;
+  await loadSelected();
+});
 
 const onExport = async () => {
   const options: ExportOptions = {
