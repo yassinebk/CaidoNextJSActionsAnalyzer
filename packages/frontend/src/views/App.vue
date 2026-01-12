@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import type { ActionEntry, DiscoveryResult, ExportOptions } from "backend";
+import type {
+  ActionEntry,
+  DiscoveryResult,
+  ExportOptions,
+} from "nextjs-actions-analyzer-backend";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
@@ -30,7 +34,7 @@ const filteredActions = computed(() => {
   const q = filterText.value.trim().toLowerCase();
   if (!q) return actions.value;
 
-  return actions.value.filter((a) => {
+  return actions.value.filter((a: ActionEntry) => {
     return (
       a.url.toLowerCase().includes(q) ||
       a.actionId.toLowerCase().includes(q) ||
@@ -207,7 +211,7 @@ onMounted(async () => {
   await refreshActions();
   await refreshDiscovery();
 
-  sdk.backend.onEvent("nextjs-actions.status", (s) => {
+  sdk.backend.onEvent("nextjs-actions.status", (s: string) => {
     status.value = s;
   });
 
@@ -216,7 +220,7 @@ onMounted(async () => {
     await refreshDiscovery();
   });
 
-  sdk.backend.onEvent("nextjs-actions.action-added", (entry) => {
+  sdk.backend.onEvent("nextjs-actions.action-added", (entry: ActionEntry) => {
     actions.value = [...actions.value, entry];
   });
 
